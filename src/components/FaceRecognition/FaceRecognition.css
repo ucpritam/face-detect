@@ -6,3 +6,15 @@
     justify-content: center;
     cursor: pointer;
   }
+
+  .imagebox {
+    width: 500px;
+    height: auto;
+  }
+
+  @media screen and (max-width: 1024px) { /* Specific to this particular image */
+    .imagebox {
+    display: flex;
+    justify-content: center; 
+    }
+  }
