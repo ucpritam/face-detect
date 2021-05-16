@@ -59,6 +59,7 @@ onButtonSubmit = () => {
 render() {
   return (
     <div className="App">
+     <div className="white b f6 mt2">{"Created by Pritam Majumder"}</div>
      <ImageLinkForm 
      onInputChange={this.onInputChange} 
      onButtonSubmit={this.onButtonSubmit}
