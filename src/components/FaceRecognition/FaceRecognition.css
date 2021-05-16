@@ -1,20 +1,21 @@
 .bounding-box {
-    position: absolute;
-    box-shadow: 0 0 30px #ff0000 inset;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    cursor: pointer;
-  }
+  position: absolute;
+  border: 1px solid #ff0000;
+  box-shadow: 0 0 15px #ff0000 inset;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  cursor: pointer;
+}
 
+.imagebox {
+  width: 500px;
+  height: auto;
+}
+
+@media screen and (max-width: 1024px) {
   .imagebox {
-    width: 500px;
-    height: auto;
-  }
-
-  @media screen and (max-width: 1024px) {
-    .imagebox {
     display: flex;
-    justify-content: center; 
-    }
+    justify-content: center;
   }
+}

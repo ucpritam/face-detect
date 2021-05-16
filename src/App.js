@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import Particles from 'react-particles-js';
 import Clarifai from 'clarifai';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
-import Logo from './components/Logo/Logo';
-import Rank from './components/Rank/Rank';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import './App.css';
 
@@ -11,17 +8,6 @@ const app = new Clarifai.App({
   apiKey: '0ef3825133c4438492b465ad3f88819b'
  });
 
-const particlesOptions = {
-    particles: {
-      number: {
-        value: 30,
-        density: {
-          enable: true,
-          value_area: 800 
-        }
-      }
-    }
-}
 
 class App extends Component {
   constructor() {
@@ -29,22 +15,23 @@ class App extends Component {
     this.state = {
       input: '',
       imageUrl: '',
-      box: {}
+      box: []
     }
   }
 
   calculateFaceLocation = (data) => {
     const image = document.getElementById('inputimage');
-    const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
     const width = Number(image.width);
     const height = Number(image.height);
-    
-    return {
-      leftCol: clarifaiFace.left_col * width,
-      topRow: clarifaiFace.top_row * height,
-      rightCol: width - (clarifaiFace.right_col * width),
-      bottomRow: height - (clarifaiFace.bottom_row * height)
-    }
+    var calculateface = data.outputs[0].data.regions; 
+    return (calculateface.map((calculateface => {
+      return {
+          leftCol: calculateface.region_info.bounding_box.left_col * width,
+          topRow: calculateface.region_info.bounding_box.top_row * height,
+          rightCol: width - (calculateface.region_info.bounding_box.right_col * width),
+          bottomRow: height - (calculateface.region_info.bounding_box.bottom_row * height)
+        }
+    })))
   }
 
 displayFaceBox = (box) => {
@@ -65,11 +52,6 @@ onButtonSubmit = () => {
 render() {
   return (
     <div className="App">
-    <Particles className='particles'
-    params={particlesOptions}
-    />
-     <Logo />
-     <Rank />
      <ImageLinkForm 
      onInputChange={this.onInputChange} 
      onButtonSubmit={this.onButtonSubmit}
