@@ -15,13 +15,13 @@ input[type="text"] {
   font-size: 17px;
   border: 1px solid grey;
   float: left;
-  width: 70%;
+  width: 60%;
   background: #f1f1f1;
 }
 
-button {
+.button {
   float: left;
-  width: 30%;
+  width: 20%;
   padding: 10px;
   background: rgb(0, 145, 0);
   color: white;
@@ -31,8 +31,24 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.button:hover {
   background: green;
+}
+
+.copy {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #5a5a5a;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+.copy:hover {
+  background: #484848;
 }
 
 .detect {
@@ -53,5 +69,20 @@ button:hover {
 @media screen and (max-width: 1024px) {
   .head {
     font-size: 25px;
+  }
+
+  input[type="text"] {
+    font-size: 12px;
+    width: 100%;
+  }
+
+  .button {
+    font-size: 12px;
+    width: auto;
+  }
+
+  .copy {
+    font-size: 12px;
+    width: auto;
   }
 }

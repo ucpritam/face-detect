@@ -15,7 +15,8 @@ class App extends Component {
     this.state = {
       input: '',
       imageUrl: '',
-      box: []
+      box: [],
+      calculateface: []
     }
   }
 
@@ -23,8 +24,10 @@ class App extends Component {
     const image = document.getElementById('inputimage');
     const width = Number(image.width);
     const height = Number(image.height);
-    var calculateface = data.outputs[0].data.regions; 
-    return (calculateface.map((calculateface => {
+    this.setState({'calculateface': data.outputs[0].data.regions})
+    // var calculateface = data.outputs[0].data.regions; 
+
+    return (this.state.calculateface.map((calculateface => {
       return {
           leftCol: calculateface.region_info.bounding_box.left_col * width,
           topRow: calculateface.region_info.bounding_box.top_row * height,
@@ -43,10 +46,14 @@ onInputChange = (event) => {
   }
 
 onButtonSubmit = () => {
+  document.getElementById("error").innerHTML="";
+  this.setState({'calculateface' : []});
+  this.setState({'box' : []});
   this.setState({imageUrl: this.state.input});
   app.models.predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
     .then(response => this.displayFaceBox(this.calculateFaceLocation(response)))
-    .catch(err => console.log(err));
+    .catch(err => 
+      document.getElementById("error").innerHTML="Invalid URL/ Image does not contain any face.");
 }
 
 render() {
@@ -55,8 +62,9 @@ render() {
      <ImageLinkForm 
      onInputChange={this.onInputChange} 
      onButtonSubmit={this.onButtonSubmit}
-     />
+     />    
      <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl}/>
+     <b id='error' className='white'></b>
     </div>
   );
 }
