@@ -5,7 +5,7 @@ import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import './App.css';
 
 const app = new Clarifai.App({
-  apiKey: '02c0199cb44047a3a3622732efd34544'
+  apiKey: 'df0deef22de945369453252c60493e01'
  });
 
 
